@@ -9,12 +9,18 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       deckId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        refrences: {
+          model: 'Decks',
+          key: 'id'
+        }
       },
       front: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       back: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       createdAt: {

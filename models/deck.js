@@ -4,12 +4,20 @@ module.exports = function(sequelize, DataTypes) {
     userId: DataTypes.INTEGER,
     title: DataTypes.STRING,
     description: DataTypes.STRING
-  }, {
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
-      }
-    }
-  });
+  }, {});
+
+  Deck.associate = function(models) {
+    Deck.belongsTo(models.User, {
+      as: 'user',
+      foreignKey: 'userId'
+    })
+
+    Deck.hasMany(models.Cards, {
+      as: 'cards',
+      foreignKey: 'deckId'
+    })
+  }
+
+  
   return Deck;
 };

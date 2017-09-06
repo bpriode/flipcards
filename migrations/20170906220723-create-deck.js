@@ -9,9 +9,14 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        refrences: {
+          model: 'Users',
+          key: 'id'
+        }
       },
       title: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       description: {

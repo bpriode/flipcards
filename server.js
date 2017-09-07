@@ -2,13 +2,15 @@ const express         = require("express");
 const mustacheExpress = require("mustache-express");
 const path            = require("path");
 const routes          = require("./routes/base");
+const api             = require("./routes/api");
 const morgan          = require("morgan");
 const bodyParser      = require("body-parser");
 const passport        = require('passport');
 const LocalStrategy   = require('passport-local').Strategy;
+const BasicStrategy   = require('passport-http').BasicStrategy;
 const session         = require('express-session');
 const flash           = require('express-flash-messages');
-const model           = require("./models/index");
+const models           = require("./models/index");
 const bcrypt          = require("bcrypt");
 
 const app  = express();
@@ -40,53 +42,61 @@ app.use(function(req, res, next) {
     next()
 });
 
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    model.User.findOne({
-      where: {
-        'username': username
-      }
-    }).then(function (user) {
-      console.log(user);
-      if (user == null) {
-        return done(null, false, { message: 'Incorrect credentials.' })
-      }
+const authenticateUser = function(username, passwordhash, done) {
+  models.User.findOne({
+    where: {
+      'username': username.toLowerCase()
+    }
+  }).then(function (user) {
+    if (user == null) {
+      return done(null, false, { message: 'Invalid username and/or password: please try again' })
+    }
 
-      let hashedPassword = bcrypt.hashSync(password, user.salt)
+    let hashedPassword = bcrypt.hashSync(passwordhash, user.salt)
 
-      if (user.passwordhash === hashedPassword) {
-        return done(null, user)
-      }
-      return done(null, false, { message: 'Incorrect credentials.' })
-    })
-  }
-))
+    if (user.passwordhash === hashedPassword) {
+      return done(null, user)
+    }
+
+    return done(null, false, { message: 'Invalid username and/or password: please try again' })
+  })
+}
+
+passport.use(new LocalStrategy(authenticateUser))
+passport.use(new BasicStrategy(authenticateUser))
 
 passport.serializeUser(function(user, done) {
   done(null, user.id)
 })
 
 passport.deserializeUser(function(id, done) {
-  model.User.findOne({
+  models.User.findOne({
     where: {
       'id': id
     }
   }).then(function (user) {
     if (user == null) {
-      done(new Error('Wrong user id.'))
+      done(new Error('Wrong user id'))
     }
 
     done(null, user)
   })
 })
 
+
 app.use(function (req, res, next) {
   res.locals.user = req.user;
   next();
 })
 
-app.use(routes);
+app.use(routes)
+app.use(api)
 
-app.listen(3000, function() {
-  console.log("App is running on localhost:3000");
-});
+if(require.main === module) {
+  app.listen(3000, function() {
+    console.log("App is running on localhost:3000");
+  });
+}
+
+
+module.exports = app;

@@ -3,13 +3,13 @@
 <header>
   <nav>
     <a href="/logout">Logout</a>
+    <a href="/user">See all Decks</a>
   </nav>
   <h1>Welcome, {{username}}</h1>
 </header>
 
 <div class="user_container">
 
-  <h3>Study in a Flash!</h3>
 
   <form class="deck_form" action="/user" method="post">
     <input type="text" name="title" value="" placeholder="Title of Deck">
@@ -18,42 +18,17 @@
   </form>
 
   <div class="study_deck">
-    {{#deck}}
+    {{#decks}}
       <div class="individual_deck">
         <h4>Created by: {{user.dataValues.username}}</h4>
         <p>{{title}}</p>
         <p>{{description}}</p>
-        <a href="/deck/{{id}}">Study Deck</a>
+        <a href="/deck/{{id}}"> Create Cards for {{title}} Deck</a>
       </div>
-    {{/deck}}
+    {{/decks}}
   </div>
 
 
-
-
-
-
-
-
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 {{/user}}

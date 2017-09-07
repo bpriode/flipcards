@@ -1,0 +1,34 @@
+<link rel="stylesheet" href="../main.css">
+
+{{#user}}
+
+
+<header>
+  <nav>
+    <a href="/logout">Logout</a>
+    <a href="/user">See all Decks</a>
+  </nav>
+
+</header>
+
+<div class="create_cards">
+  <form class="add_cards" action="/deck/{{id}}" method="post">
+      <input type="text" name="front" value="" placeholder="Front of Card">
+      <input type="text" name="back" value="" placeholder="Back of Card">
+      <button type="submit" name="button">Add Card to Deck</button>
+  </form>
+</div>
+
+{{#cards}}
+  <div class="card_container">
+    <div class="front">
+        <p>{{front}}</p>
+    </div>
+    <div class="back">
+        <p>{{back}}</p>
+    </div>
+    <a href="/destroy/{{id}}">Delete Card</a>
+  </div>
+{{/cards}}
+
+{{/user}}

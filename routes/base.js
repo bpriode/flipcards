@@ -64,14 +64,14 @@ req.isAuthenticated();
         {model: models.Card, as: 'cards'}
       ]
     }).then(function(decks) {
-      res.render('user', {deck: decks})
+      res.render('user', {decks: decks})
     })
     .catch(function(err){
       res.send(err)
     })
   });
 
-  router.post('/user', isAuthenticated, function (req, res, next) {
+  router.post("/user", isAuthenticated, function (req, res) {
     models.Deck.create({
       userId: req.user.id,
       title: req.body.title,
@@ -82,12 +82,57 @@ req.isAuthenticated();
     })
   });
 
+  router.get("/deck/:id", isAuthenticated, function(req, res) {
+    models.Card.findAll({
+      order: [['createdAt', 'Desc']],
+      include: [
+        {model: models.Deck, as: 'deck'},
+      ],
+
+    })
+    .then(function(cards) {
+      res.render('deck', {cards: cards})
+    })
+    .catch(function(err){
+      res.send(err)
+    })
+  });
+
+  router.post("/deck/:id", function (req, res) {
+    models.Card.create({
+      deckId: req.params.id,
+      front: req.body.front,
+      back: req.body.back
+    })
+    .then(function(data) {
+      res.redirect('/deck/:id');
+    })
+    .catch(function(err){
+      res.send(err)
+    })
+  });
+
+  router.get('/destroy/:id', isAuthenticated, function(req, res, next) {
+      models.Card.destroy({
+        where: {
+          id: req.params.id
+        }
+      })
+    .then(function(data) {
+      res.redirect('/deck/:id');
+    })
+    .catch(function(err){
+      res.send(err)
+    })
+  })
+
+
+
+
   router.get("/logout", function(req, res) {
-  req.logout();
-  res.redirect("/");
-});
-
-
+    req.logout();
+    res.redirect("/");
+  });
 
 
   module.exports = router;

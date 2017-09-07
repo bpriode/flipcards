@@ -12,12 +12,12 @@ module.exports = function(sequelize, DataTypes) {
       foreignKey: 'userId'
     })
 
-    Deck.hasMany(models.Cards, {
+    Deck.hasMany(models.Card, {
       as: 'cards',
       foreignKey: 'deckId'
     })
   }
 
-  
+
   return Deck;
 };

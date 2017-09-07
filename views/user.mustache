@@ -1,1 +1,59 @@
-<h1>user</h1>
+{{#user}}
+
+<header>
+  <nav>
+    <a href="/logout">Logout</a>
+  </nav>
+  <h1>Welcome, {{username}}</h1>
+</header>
+
+<div class="user_container">
+
+  <h3>Study in a Flash!</h3>
+
+  <form class="deck_form" action="/user" method="post">
+    <input type="text" name="title" value="" placeholder="Title of Deck">
+    <textarea name="description" rows="4" cols="40" placeholder="Short Description of Study Deck"></textarea>
+    <input type="submit" name="submit" value="Create Deck">
+  </form>
+
+  <div class="study_deck">
+    {{#deck}}
+      <div class="individual_deck">
+        <h4>Created by: {{user.dataValues.username}}</h4>
+        <p>{{title}}</p>
+        <p>{{description}}</p>
+        <a href="/deck/{{id}}">Study Deck</a>
+      </div>
+    {{/deck}}
+  </div>
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{/user}}

@@ -1,1 +1,36 @@
-<h1>login</h1>
+
+
+<div class="form_container">
+  <div class="login_container">
+    <h2>Log In</h2>
+    <form class="login_form" action="/" method="post">
+      <input type="text" name="username" placeholder="Username" autofocus>
+      <br>
+      <input type="password" name="password" placeholder="Password">
+      <br>
+      <button type="submit" name="button">Login</button>
+    </form>
+    {{#message}}
+      {{.}}
+    {{/message}}
+  </div>
+
+  <div class="theme">
+    <h1>--Flipcards--</h1>
+    <br>
+    <h4>Start creating an easier way to study</h4>
+  </div>
+
+
+  <div class="signup_container">
+    <h2>Create Account</h2>
+    <form class="signup_form" action="/login" method="post">
+      <input type="text" name="username" placeholder="Username">
+      <br>
+      <input type="password" name="password" placeholder="Password">
+      <br>
+      <button type="submit" name="button">Submit</button>
+    </form>
+
+  </div>
+</div>

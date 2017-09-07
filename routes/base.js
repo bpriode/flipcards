@@ -56,8 +56,36 @@ req.isAuthenticated();
     });
   });
 
+  router.get("/user", isAuthenticated, function(req, res) {
+    models.Deck.findAll({
+      order: [['createdAt', 'Desc']],
+      include: [
+        {model: models.User, as: 'user'},
+        {model: models.Card, as: 'cards'}
+      ]
+    }).then(function(decks) {
+      res.render('user', {deck: decks})
+    })
+    .catch(function(err){
+      res.send(err)
+    })
+  });
 
+  router.post('/user', isAuthenticated, function (req, res, next) {
+    models.Deck.create({
+      userId: req.user.id,
+      title: req.body.title,
+      description: req.body.description
+    })
+    .then(function(data) {
+      res.redirect('/user');
+    })
+  });
 
+  router.get("/logout", function(req, res) {
+  req.logout();
+  res.redirect("/");
+});
 
 
 

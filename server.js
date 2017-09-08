@@ -90,7 +90,7 @@ app.use(function (req, res, next) {
 })
 
 app.use(routes)
-app.use(api)
+app.use('/api', routes)
 
 if(require.main === module) {
   app.listen(3000, function() {

@@ -7,12 +7,12 @@ const router  = express.Router();
 
 
 //auth to access API
-router.get('/api/login', passport.authenticate('basic', {session: false}), function(req, res) {
+router.get('/login', passport.authenticate('basic', {session: false}), function(req, res) {
   res.status(200).send('Here is my Flipcard API')
 })
 
 //get all decks
-router.get("/api/user", passport.authenticate('basic', {session: false}), function(req, res) {
+router.get("/user", passport.authenticate('basic', {session: false}), function(req, res) {
   models.Deck.findAll({})
   .then(function(decks) {
     res.status(200).send(decks)
@@ -23,7 +23,7 @@ router.get("/api/user", passport.authenticate('basic', {session: false}), functi
 });
 
 //create a deck
-router.post("/api/user", passport.authenticate('basic', {session: false}), function (req, res) {
+router.post("/user", passport.authenticate('basic', {session: false}), function (req, res) {
   models.Deck.create({
     userId: req.user.id,
     title: req.body.title,
@@ -38,7 +38,7 @@ router.post("/api/user", passport.authenticate('basic', {session: false}), funct
 });
 
 // open a deck and see the cards
-router.get("/api/deck/:id", passport.authenticate('basic', {session: false}), function(req, res) {
+router.get("/deck/:id", passport.authenticate('basic', {session: false}), function(req, res) {
   models.Deck.findById(req.params.id)
   .then(function(cards) {
     models.Card.findAll({
@@ -57,7 +57,7 @@ router.get("/api/deck/:id", passport.authenticate('basic', {session: false}), fu
 });
 
 //create cards within a deck
-router.post("/api/deck/:deckId", passport.authenticate('basic', {session: false}), function (req, res) {
+router.post("/deck/:deckId", passport.authenticate('basic', {session: false}), function (req, res) {
 
   models.Card.create({
     deckId: req.params.deckId,
@@ -73,7 +73,7 @@ router.post("/api/deck/:deckId", passport.authenticate('basic', {session: false}
 });
 
 //allows you to delete a card within a deck
-router.get('/api/delete/:deckId', function(req, res, next) {
+router.get('/delete/:deckId', function(req, res, next) {
 
     models.Card.destroy({
       where: {
@@ -89,7 +89,7 @@ router.get('/api/delete/:deckId', function(req, res, next) {
 })
 
 //take a quiz over a deck with cards shuffling randomly
-router.get('/api/deck/:id/quiz', function(req, res) {
+router.get('/deck/:id/quiz', function(req, res) {
 
   models.Deck.findById(req.params.id)
   .then(function(cards) {

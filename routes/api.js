@@ -1,8 +1,6 @@
 const express  = require("express");
 const passport = require('passport');
-const Deck = require('../models/deck');
-const User = require('../models/user');
-const Card = require('../models/card')
+const models   = require("../models/index")
 const BasicStrategy     = require('passport-http').BasicStrategy;
 const router  = express.Router();
 
@@ -15,19 +13,65 @@ router.get('/api/login', passport.authenticate('basic', {session: false}), funct
 
 //get all decks
 router.get("/api/user", passport.authenticate('basic', {session: false}), function(req, res) {
-  Deck.findAll({
-    order: [['createdAt', 'Desc']],
-    include: [
-      {model: User, as: 'user'},
-      {model: Card, as: 'cards'}
-    ]
-  })
-  .then(function(data) {
-    res.send(data)
+  models.Deck.findAll({})
+  .then(function(decks) {
+    res.status(200).send(decks)
   })
   .catch(function(err){
     res.send(err)
   })
 });
+
+//create a deck
+router.post("/api/user", passport.authenticate('basic', {session: false}), function (req, res) {
+  models.Deck.create({
+    userId: req.user.id,
+    title: req.body.title,
+    description: req.body.description
+  })
+  .then(function(deck) {
+    res.status(200).send(deck)
+  })
+  .catch(function(err) {
+    res.send(err)
+  })
+});
+
+// open a deck and see the cards
+router.get("/api/deck/:id", passport.authenticate('basic', {session: false}), function(req, res) {
+  models.Deck.findById(req.params.id)
+  .then(function(cards) {
+    models.Card.findAll({
+      where: {deckId: req.params.id},
+      include: [
+        {model: models.Deck, as: 'deck'}
+      ]
+    })
+    .then(function(cards) {
+      res.status(200).send(cards)
+    })
+    .catch(function(err) {
+      res.send(err)
+    })
+  })
+});
+
+//create cards within a deck
+router.post("/deck/:deckId", passport.authenticate('basic', {session: false}), function (req, res) {
+
+  models.Card.create({
+    deckId: req.params.deckId,
+    front: req.body.front,
+    back: req.body.back
+  })
+  .then(function(data) {
+    res.status(200).send(data)
+  })
+  .catch(function(err){
+    res.send(err)
+  })
+});
+
+
 
 module.exports = router;

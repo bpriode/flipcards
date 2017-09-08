@@ -88,12 +88,7 @@ req.isAuthenticated();
 
 
   router.get("/deck/:id", function(req, res) {
-    models.Deck.findOne({
-      where: { id: req.params.id },
-      include: [
-        {model: models.Card, as: 'cards'}
-      ]
-    })
+    models.Deck.findById(req.params.id)
     .then(function(cards) {
     models.Card.findAll({
       where: {deckId: req.params.id},
@@ -102,7 +97,7 @@ req.isAuthenticated();
       ]
     })
     .then(function(cards) {
-      res.render('deck', {showCards: cards})
+      res.render('deck', {showCards: cards, deckId: req.params.id})
     })
     .catch(function(err) {
       console.log(err);
@@ -111,32 +106,60 @@ req.isAuthenticated();
   })
 });
 
-  router.post("/deck/:id", function (req, res) {
+  router.post("/deck/:deckId", function (req, res) {
+    console.log('req.params.deckId', req.params.deckId);
+
     models.Card.create({
-      deckId: req.params.id,
+      deckId: req.params.deckId,
       front: req.body.front,
       back: req.body.back
     })
     .then(function(data) {
-      res.redirect('/deck/' + req.params.id);
+      res.redirect('/deck/' + req.params.deckId);
     })
     .catch(function(err){
       res.send(err)
     })
   });
 
-  router.get('/delete/:id', function(req, res, next) {
+  router.get('/delete/:deckId', function(req, res, next) {
 
       models.Card.destroy({
         where: {
-          id: req.params.id
+          deckId: req.params.deckId
         }
       })
     .then(function(data) {
-      res.redirect('/deck/' + req.params.id);
+      res.redirect('/deck/' + req.params.deckId);
     })
     .catch(function(err){
       res.send(err)
+    })
+  })
+
+  router.get('/deck/:id/quiz', function(req, res) {
+
+    models.Deck.findById(req.params.id)
+    .then(function(cards) {
+      models.Card.findAll({
+        where: {
+          deckId: req.params.id
+        }
+      })
+      .then(function(cards){
+        // console.log('dataaaaaaa', cards);
+        let length = cards.length
+        let random = [];
+
+        for (var i = 0; i < length; i++) {
+          random.push(cards.splice(Math.floor(Math.random()*cards.length), 1)[0]);
+        }
+
+      res.render('quiz', {cards:cards, random:random})  // console.log('RANDOM!!!', random);
+      })
+    })
+    .then(function(cards){
+
     })
   })
 

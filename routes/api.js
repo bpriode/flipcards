@@ -13,16 +13,17 @@ router.get('/api/login', passport.authenticate('basic', {session: false}), funct
   res.status(200).send('Here is my Flipcard API')
 })
 
-//get all users
-router.get("/user", passport.authenticate('basic', {session: false}), function(req, res) {
+//get all decks
+router.get("/api/user", passport.authenticate('basic', {session: false}), function(req, res) {
   Deck.findAll({
     order: [['createdAt', 'Desc']],
     include: [
-      {model: models.User, as: 'user'},
-      {model: models.Card, as: 'cards'}
+      {model: User, as: 'user'},
+      {model: Card, as: 'cards'}
     ]
-  }).then(function(decks) {
-    res.render('user', {decks: decks})
+  })
+  .then(function(data) {
+    res.send(data)
   })
   .catch(function(err){
     res.send(err)

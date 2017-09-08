@@ -4,7 +4,7 @@ const app     = require('../server');
 
 
 describe('GET /api/login', function() {
-  test('should retrieve login sucessfully', function() {
+  test('should render login sucessfully', function() {
     return request(app)
       .get('/api/login')
       .expect(200)

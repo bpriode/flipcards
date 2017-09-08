@@ -1,0 +1,26 @@
+
+
+<header>
+  <nav>
+    <a href="/logout">Logout</a>
+    <a href="/user">See all Decks</a>
+  </nav>
+
+</header>
+
+
+{{#random}}
+<div class="flashCards">
+  <ul>
+    <li>
+      <p>{{front}}</p>
+      <hr>
+      <ul>
+        <li><p>{{back}}</p></li>
+      </ul>
+    </li>
+  </ul>
+
+</div>
+
+{{/random}}

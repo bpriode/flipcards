@@ -21,7 +21,7 @@ nav a{
   flex-direction: row;
   justify-content: center;
   height: 700px;
-  background-image: url('joanna-kosinska-129039.jpg');
+  background-image: url('brandi-redd-122054.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -29,7 +29,7 @@ nav a{
 }
 
 .login_container{
-  background-color: gainsboro;
+  background-color: darkgray;
   height: 300px;
   width: 300px;
   text-align: center;
@@ -52,8 +52,10 @@ nav a{
 
 .theme{
   text-align: center;
-  margin-top: 200px;
+  margin-top: 210px;
   padding: 15px;
+  background-color: white;
+  height: 275px;
 }
 
 .theme h1{
@@ -67,7 +69,7 @@ nav a{
 }
 
 .signup_container{
-  background-color: gainsboro;
+  background-color: darkgray;
   height: 300px;
   width: 300px;
   text-align: center;
@@ -174,4 +176,54 @@ nav a{
   width: 25%;
   margin-top: 65px;
   color: dimgray;
+}
+
+/*quiz*/
+
+.flashCards{
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  width: 400px;
+  text-align: center;
+  border: 2px solid gray;
+  margin: 20px;
+  margin-left: 500px;
+}
+
+.flashCards ul li{
+  float: left;
+  font-weight: 500;
+  font-size: 20px;
+  margin-left: 25px;
+  list-style:none;
+}
+
+.flashCards ul li p{
+  color:#2d3438;
+  font-size: 30px;
+  border-radius: 4px;
+  padding: 7px 25px;
+  text-decoration:none;
+}
+
+.flashCards ul li hr {
+ border: 0px;
+ padding: 0px;
+ margin: 9px 0px 0px 0px;
+}
+
+.flashCards ul li ul{
+  display: none;
+  width: 200px;
+  float: left;
+  background-color: lightyellow;
+  border: 1px solid gray;
+  position: absolute;
+  padding: 5px 0 ;
+  border-radius:4px;
+}
+
+.flashCards ul li:hover ul {
+  display: block;
 }

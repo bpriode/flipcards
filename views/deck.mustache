@@ -1,6 +1,6 @@
 
 
-{{#user}}
+{{#decks}}
 
 
 <header>
@@ -12,7 +12,7 @@
 </header>
 
 <div class="create_cards">
-  <form class="add_cards" action="/deck/{{id}}" method="post">
+  <form class="add_cards" action="/deck/{{deckId}}" method="post">
       <input type="text" name="front" value="" placeholder="Front of Card">
       <input type="text" name="back" value="" placeholder="Back of Card">
       <button type="submit" name="button">Add Card to Deck</button>
@@ -27,12 +27,12 @@
     <div class="back">
         <p>{{back}}</p>
     </div>
-    <a href="/delete/{{id}}">Delete Card</a>
-    <a href="/edit/{{id}}">Edit Card</a>
+    <a href="/delete/{{deckId}}">Delete Card</a>
+    <a href="/edit/{{deckId}}">Edit Card</a>
   </div>
 {{/showCards}}
 
 
 
 
-{{/user}}
+{{/decks}}

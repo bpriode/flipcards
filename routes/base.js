@@ -158,10 +158,9 @@ req.isAuthenticated();
       res.render('quiz', {cards:cards, random:random})
       })
     })
-    .then(function(cards){
-
+    .catch(funcion(err) {
+      res.send(err)
     })
-  })
 
 
 

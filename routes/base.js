@@ -107,7 +107,7 @@ req.isAuthenticated();
 });
 
   router.post("/deck/:deckId", function (req, res) {
-    console.log('req.params.deckId', req.params.deckId);
+
 
     models.Card.create({
       deckId: req.params.deckId,
@@ -147,7 +147,7 @@ req.isAuthenticated();
         }
       })
       .then(function(cards){
-        // console.log('dataaaaaaa', cards);
+
         let length = cards.length
         let random = [];
 
@@ -155,7 +155,7 @@ req.isAuthenticated();
           random.push(cards.splice(Math.floor(Math.random()*cards.length), 1)[0]);
         }
 
-      res.render('quiz', {cards:cards, random:random})  // console.log('RANDOM!!!', random);
+      res.render('quiz', {cards:cards, random:random})
       })
     })
     .then(function(cards){

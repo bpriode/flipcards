@@ -63,7 +63,8 @@ req.isAuthenticated();
         {model: models.User, as: 'user'},
         {model: models.Card, as: 'cards'}
       ]
-    }).then(function(decks) {
+    })
+    .then(function(decks) {
       res.render('user', {decks: decks})
     })
     .catch(function(err){
@@ -71,7 +72,7 @@ req.isAuthenticated();
     })
   });
 
-  router.post("/user", isAuthenticated, function (req, res) {
+  router.post("/user",  function (req, res) {
     models.Deck.create({
       userId: req.user.id,
       title: req.body.title,
@@ -80,23 +81,35 @@ req.isAuthenticated();
     .then(function(data) {
       res.redirect('/user');
     })
-  });
-
-  router.get("/deck/:id", isAuthenticated, function(req, res) {
-    models.Card.findAll({
-      order: [['createdAt', 'Desc']],
-      include: [
-        {model: models.Deck, as: 'deck'},
-      ],
-
-    })
-    .then(function(cards) {
-      res.render('deck', {cards: cards})
-    })
-    .catch(function(err){
+    .catch(function(err) {
       res.send(err)
     })
   });
+
+
+  router.get("/deck/:id", function(req, res) {
+    models.Deck.findOne({
+      where: { id: req.params.id },
+      include: [
+        {model: models.Card, as: 'cards'}
+      ]
+    })
+    .then(function(cards) {
+    models.Card.findAll({
+      where: {deckId: req.params.id},
+      include: [
+        {model: models.Deck, as: 'deck'}
+      ]
+    })
+    .then(function(cards) {
+      res.render('deck', {showCards: cards})
+    })
+    .catch(function(err) {
+      console.log(err);
+      res.send(err)
+    })
+  })
+});
 
   router.post("/deck/:id", function (req, res) {
     models.Card.create({
@@ -105,21 +118,22 @@ req.isAuthenticated();
       back: req.body.back
     })
     .then(function(data) {
-      res.redirect('/deck/:id');
+      res.redirect('/deck/' + req.params.id);
     })
     .catch(function(err){
       res.send(err)
     })
   });
 
-  router.get('/destroy/:id', isAuthenticated, function(req, res, next) {
+  router.get('/delete/:id', function(req, res, next) {
+
       models.Card.destroy({
         where: {
           id: req.params.id
         }
       })
     .then(function(data) {
-      res.redirect('/deck/:id');
+      res.redirect('/deck/' + req.params.id);
     })
     .catch(function(err){
       res.send(err)

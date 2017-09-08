@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../main.css">
+
 
 {{#user}}
 
@@ -19,7 +19,7 @@
   </form>
 </div>
 
-{{#cards}}
+{{#showCards}}
   <div class="card_container">
     <div class="front">
         <p>{{front}}</p>
@@ -27,8 +27,12 @@
     <div class="back">
         <p>{{back}}</p>
     </div>
-    <a href="/destroy/{{id}}">Delete Card</a>
+    <a href="/delete/{{id}}">Delete Card</a>
+    <a href="/edit/{{id}}">Edit Card</a>
   </div>
-{{/cards}}
+{{/showCards}}
+
+
+
 
 {{/user}}

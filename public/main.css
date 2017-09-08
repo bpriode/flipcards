@@ -10,9 +10,12 @@ nav{
 
 nav a{
   text-decoration: none;
+  font-size: 20px;
   margin: 15px;
   color: slategray;
+  justify-content: flex-start;
 }
+
 .form_container{
   display: flex;
   flex-direction: row;
@@ -84,7 +87,64 @@ nav a{
   font-size: 18px;
 }
 
-/*//cards*/
+/*deck*/
+.study_deck{
+  display: flex;
+  flex-direction: row;
+}
+.individual_deck{
+  border: 1px solid gray;
+  width: 300px;
+  margin: 20px;
+  font-size: 20px;
+}
+
+.deck_form{
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+  align-items: center;
+}
+
+.deck_form input{
+  height: 70px;
+  width: 200px;
+  font-size: 26px;
+  margin: 10px;
+}
+.deck_form textarea{
+  height: 70px;
+  width: 400px;
+  font-size: 26px;
+}
+.deck_form button{
+  height: 30px;
+  width: 150px;
+  font-size: 18px;
+  color: slategray;
+  margin: 10px;
+}
+
+
+/*card*/
+.create_cards{
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+.add_cards input{
+  height: 70px;
+  width: 400px;
+  font-size: 26px;
+}
+
+.add_cards button{
+  height: 30px;
+  width: 150px;
+  font-size: 18px;
+  color: slategray;
+}
 
 .card_container{
   display: flex;
@@ -95,19 +155,23 @@ nav a{
   border: 1px solid gray;
   margin-bottom: 20px;
   margin-left: 450px;
+  font-size: 26px;
 }
 
 .card_container a{
   text-decoration: none;
   margin-top: 15px;
+  font-size: 14px;
 }
 
 .front{
   width: 25%;
-  margin-top: 75px;
+  margin-top: 65px;
+  color: lightslategray;
 }
 
 .back{
   width: 25%;
-  margin-top: 75px;
+  margin-top: 65px;
+  color: dimgray;
 }

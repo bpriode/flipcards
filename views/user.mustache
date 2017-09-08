@@ -14,16 +14,19 @@
   <form class="deck_form" action="/user" method="post">
     <input type="text" name="title" value="" placeholder="Title of Deck">
     <textarea name="description" rows="4" cols="40" placeholder="Short Description of Study Deck"></textarea>
-    <input type="submit" name="submit" value="Create Deck">
+    <button type="submit" name="button">Create Deck</button>
   </form>
 
   <div class="study_deck">
     {{#decks}}
       <div class="individual_deck">
-        <h4>Created by: {{user.dataValues.username}}</h4>
         <p>{{title}}</p>
         <p>{{description}}</p>
-        <a href="/deck/{{id}}"> Create Cards for {{title}} Deck</a>
+        <h4>Created by: {{user.dataValues.username}}</h4>
+        <br>
+          <a href="/deck/{{id}}"> Create Cards for {{title}} Deck</a>
+          <a href="/quiz/{{id}}">Take a Quiz</a>
+
       </div>
     {{/decks}}
   </div>

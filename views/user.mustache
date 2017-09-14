@@ -20,12 +20,16 @@
   <div class="study_deck">
     {{#decks}}
       <div class="individual_deck">
-        <p>{{title}}</p>
-        <p>{{description}}</p>
+        <p>Title: {{title}}</p>
+        <p>Description: {{description}}</p>
         <h4>Created by: {{user.dataValues.username}}</h4>
         <br>
-          <a href="/deck/{{id}}"> Create Cards for {{title}} Deck</a>
+          <a href="/deck/{{id}}"> Create or View all {{title}} Cards</a>
+          <br>
+          <br>
           <a href="/deck/{{id}}/quiz">Take a Quiz</a>
+          <br>
+          <br>
 
       </div>
     {{/decks}}

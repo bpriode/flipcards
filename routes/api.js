@@ -1,21 +1,22 @@
-const express  = require("express");
-const passport = require('passport');
-const models   = require("../models/index")
+const express           = require("express");
+const passport          = require('passport');
+const models            = require("../models/index")
 const BasicStrategy     = require('passport-http').BasicStrategy;
+
 const router  = express.Router();
 
 
 
 //auth to access API
 router.get('/login', passport.authenticate('basic', {session: false}), function(req, res) {
-  res.status(200).send('Here is my Flipcard API')
+  res.status(200).json('Here is my Flipcard API')
 })
 
 //get all decks
 router.get("/user", passport.authenticate('basic', {session: false}), function(req, res) {
   models.Deck.findAll({})
   .then(function(decks) {
-    res.status(200).send(decks)
+    res.status(200).json(decks)
   })
   .catch(function(err){
     res.send(err)
@@ -30,7 +31,7 @@ router.post("/user", passport.authenticate('basic', {session: false}), function 
     description: req.body.description
   })
   .then(function(deck) {
-    res.status(200).send(deck)
+    res.status(200).json(deck)
   })
   .catch(function(err) {
     res.send(err)
@@ -48,7 +49,7 @@ router.get("/deck/:id", passport.authenticate('basic', {session: false}), functi
       ]
     })
     .then(function(cards) {
-      res.status(200).send(cards)
+      res.status(200).json(cards)
     })
     .catch(function(err) {
       res.send(err)
@@ -65,7 +66,7 @@ router.post("/deck/:deckId", passport.authenticate('basic', {session: false}), f
     back: req.body.back
   })
   .then(function(data) {
-    res.status(200).send(data)
+    res.status(200).json(data)
   })
   .catch(function(err){
     res.send(err)
@@ -73,15 +74,15 @@ router.post("/deck/:deckId", passport.authenticate('basic', {session: false}), f
 });
 
 //allows you to delete a card within a deck
-router.get('/delete/:deckId', function(req, res, next) {
+router.delete('/delete/deck/:deckId', function(req, res, next) {
 
     models.Card.destroy({
       where: {
-        deckId: req.params.deckId
+        id: req.params.deckId
       }
     })
   .then(function(data) {
-    res.status(200).send(data)
+    res.status(200).json(data)
   })
   .catch(function(err){
     res.send(err)
@@ -107,15 +108,13 @@ router.get('/deck/:id/quiz', function(req, res) {
         random.push(cards.splice(Math.floor(Math.random()*cards.length), 1)[0]);
       }
 
-      res.status(200).send(cards)
+      res.status(200).json(cards)
     })
   })
-  .catch(funcion(err) {
+  .catch(function(err) {
     res.send(err)
   })
-
-
-
+})
 
 
 

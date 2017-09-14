@@ -91,6 +91,7 @@ req.isAuthenticated();
     models.Deck.findById(req.params.id)
     .then(function(cards) {
     models.Card.findAll({
+      order: [['createdAt', 'Desc']],
       where: {deckId: req.params.id},
       include: [
         {model: models.Deck, as: 'deck'}
@@ -122,11 +123,11 @@ req.isAuthenticated();
     })
   });
 
-  router.get('/delete/:deckId', function(req, res, next) {
+  router.get('/delete/:deckId/:id', function(req, res, next) {
 
       models.Card.destroy({
         where: {
-          deckId: req.params.deckId
+          id: req.params.id
         }
       })
     .then(function(data) {
@@ -158,9 +159,10 @@ req.isAuthenticated();
       res.render('quiz', {cards:cards, random:random})
       })
     })
-    .catch(funcion(err) {
+    .catch(function(err) {
       res.send(err)
     })
+  })
 
 
 

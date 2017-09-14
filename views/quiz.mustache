@@ -1,27 +1,32 @@
-
-
 <header>
   <nav>
     <a href="/logout">Logout</a>
     <a href="/user">See all Decks</a>
   </nav>
-
 </header>
+<div class="quiz">
 
-<h1>Test Yourself! Hover over the word to reveal the answer</h1>
 
-{{#random}}
-<div class="flashCards">
-  <ul>
-    <li>
-      <p>{{front}}</p>
-      <hr>
-      <ul>
-        <li><p>{{back}}</p></li>
-      </ul>
-    </li>
-  </ul>
+  <h1>Test Yourself!</h1>
+  <h1>Hover over the word to reveal the answer</h1>
+
+  {{#random}}
+  <div class="flashCards">
+    <br>
+    <a href="#">I got it!</a>
+    <br>
+    <a href="#">Need to Keep Studying</a>
+    <ul>
+      <li>
+        <p>{{front}}</p>
+        <hr>
+        <ul>
+          <li><p>{{back}}</p></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  {{/random}}
 
 </div>
-
-{{/random}}

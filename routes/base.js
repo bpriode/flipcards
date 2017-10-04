@@ -164,6 +164,10 @@ req.isAuthenticated();
     })
   })
 
+  router.get("/quizOver", function(req, res) {
+    res.render("quizOver");
+  });
+
 
 
 

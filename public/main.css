@@ -210,7 +210,7 @@ nav a{
   text-align: center;
   border: 2px solid gray;
   margin-bottom: 20px;
-  margin-left: 30%;
+  margin-left: 35%;
 
 }
 
@@ -218,12 +218,16 @@ nav a{
   text-decoration: none;
   color: black;
   width: 50%;
+  border: 1px solid gray;
+  margin-left: 10%;
 }
 
 .flashCards a:visited{
   text-decoration: none;
   color: black;
   width: 50%;
+  margin-left: 10%;
+  border: 1px solid gray;
 }
 .flashCards ul li{
   float: left;
@@ -260,4 +264,31 @@ nav a{
 
 .flashCards ul li:hover ul {
   display: block;
+}
+
+
+/*quizOver*/
+
+.quizOver{
+  display: flex;
+  flex-direction: column;
+  margin-left: 40%;
+}
+
+.quizOver h1{
+  font-size: 40px;
+}
+
+.quizOver a{
+  text-decoration: none;
+  color: black;
+  width: 50%;
+  margin-left: 10%;
+}
+
+.quizOver a:visited{
+  text-decoration: none;
+  color: black;
+  width: 50%;
+  margin-left: 10%;
 }

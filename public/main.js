@@ -18,7 +18,7 @@ for (var i = 0; i < correctButton.length; i++) {
       scoreDisplay.innerHTML = `Your Score: ${score}/${total}`
   if(score === total) {
     console.log('Gameover');
-
+    window.location.href = "/quizOver/"
   }
  })
 }

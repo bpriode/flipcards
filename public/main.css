@@ -209,21 +209,22 @@ nav a{
   width: 400px;
   text-align: center;
   border: 2px solid gray;
-  margin: 20px;
-  margin-left: 500px;
+  margin-bottom: 20px;
+  margin-left: 30%;
+
 }
 
 .flashCards a{
   text-decoration: none;
   color: black;
+  width: 50%;
 }
 
 .flashCards a:visited{
   text-decoration: none;
   color: black;
+  width: 50%;
 }
-
-
 .flashCards ul li{
   float: left;
   font-weight: 500;

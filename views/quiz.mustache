@@ -5,17 +5,23 @@
   </nav>
 </header>
 <div class="quiz">
-
-
   <h1>Test Yourself!</h1>
   <h1>Hover over the word to reveal the answer</h1>
+  <br>
+  <h1 id="totalScore"></h1>
+  </div>
+
+  <!-- <br>
+  <button type="button" name="correct">I got it!</button>
+  <br>
+  <button type="button" name="incorrect">Need to Keep Studying</button> -->
 
   {{#random}}
   <div class="flashCards">
     <br>
-    <a href="#">I got it!</a>
+    <a href="#" class="correct">Got it!</a>
     <br>
-    <a href="#">Need to Keep Studying</a>
+    <a href="#" class="incorrect">Keep Studying</a>
     <ul>
       <li>
         <p>{{front}}</p>
@@ -29,4 +35,4 @@
 
   {{/random}}
 
-</div>
+  <script src="/main.js"></script>

@@ -197,6 +197,9 @@ nav a{
 }
 
 /*quiz*/
+#totalScore{
+  position: fixed;
+}
 
 .quiz h1{
   text-align: center;
@@ -205,7 +208,7 @@ nav a{
 .flashCards{
   display: flex;
   flex-direction: column;
-  height: 350px;
+  height: 400px;
   width: 400px;
   text-align: center;
   border: 2px solid gray;
@@ -229,6 +232,16 @@ nav a{
   margin-left: 10%;
   border: 1px solid gray;
 }
+
+.flashCards a:active{
+  text-decoration: none;
+  color: black;
+  width: 50%;
+  margin-left: 10%;
+  border: 1px solid gray;
+  background-color: yellow;
+}
+
 .flashCards ul li{
   float: left;
   font-weight: 500;

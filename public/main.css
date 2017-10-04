@@ -278,30 +278,3 @@ nav a{
 .flashCards ul li:hover ul {
   display: block;
 }
-
-
-/*quizOver*/
-
-.quizOver{
-  display: flex;
-  flex-direction: column;
-  margin-left: 40%;
-}
-
-.quizOver h1{
-  font-size: 40px;
-}
-
-.quizOver a{
-  text-decoration: none;
-  color: black;
-  width: 50%;
-  margin-left: 10%;
-}
-
-.quizOver a:visited{
-  text-decoration: none;
-  color: black;
-  width: 50%;
-  margin-left: 10%;
-}

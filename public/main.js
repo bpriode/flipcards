@@ -14,26 +14,25 @@ console.log('score',score);
 
 for (var i = 0; i < correctButton.length; i++) {
   correctButton[i].addEventListener('click', function() {
-      score++
-      attempt++
-      console.log(correctButton.length);
-      console.log(score);
-      scoreDisplay.innerHTML = `Your Score: ${score}/${total}`
-        if(attempt === total) {
-          console.log('Gameover');
-          window.location.href = "/quizOver/";
-  }
- })
+      if(attempt !== total) {
+        score++
+        attempt++
+        scoreDisplay.innerHTML = `Your Score: ${score}/${total}`
+      }else {
+        alert(scoreDisplay.innerHTML = `Quiz Finished! Your Score: ${score}/${total}`)
+    }
+  })
 }
+
 
 for (var i = 0; i < incorrectButton.length; i++) {
   incorrectButton[i].addEventListener('click', function() {
-    attempt++
-    scoreDisplay.innerHTML = `Your Score: ${score}/${total}`
-    console.log('attempt', attempt);
-        if(attempt === total) {
-          console.log('Gameover');
-          window.location.href = "/quizOver/";
+    if(attempt !== total) {
+      attempt++
+      scoreDisplay.innerHTML = `Your Score: ${score}/${total}`
+      console.log('attempt', attempt);
+    } else {
+          alert(scoreDisplay.innerHTML = `Quiz Finished! Your Score: ${score}/${total}`)
     }
   })
 }

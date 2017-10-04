@@ -15,6 +15,9 @@ const bcrypt          = require("bcrypt");
 
 const app  = express();
 
+//set port for production
+app.set('port', (process.env.PORT || 3000));
+
 app.use(express.static(path.join(__dirname, "public")));
 
 app.engine("mustache", mustacheExpress());
@@ -93,8 +96,8 @@ app.use(routes)
 app.use('/api', routes)
 
 if(require.main === module) {
-  app.listen(3000, function() {
-    console.log("App is running on localhost:3000");
+  app.listen(app.get('port'), function() {
+    console.log("Node app is running on port", app.get('port'));
   });
 }
 
